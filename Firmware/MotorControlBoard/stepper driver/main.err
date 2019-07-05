@@ -1,0 +1,9 @@
+>>> Warning 225 "main.c" Line 23(12,14): Duplicate #define
+>>> Warning 225 "main.c" Line 24(13,15): Duplicate #define
+>>> Warning 203 "main.c" Line 170(1,1): Condition always TRUE
+>>> Warning 203 "main.c" Line 245(1,1): Condition always TRUE
+>>> Warning 216 "main.c" Line 490(3,4): Interrupts disabled during call to prevent re-entrancy:  (HwSerialTxFIFO)
+>>> Warning 216 "main.c" Line 490(3,4): Interrupts disabled during call to prevent re-entrancy:  (HwPutc)
+>>> Warning 202 "main.c" Line 39(25,34): Variable never used:   currState
+      Memory usage:   ROM=10%      RAM=19% - 20%
+      0 Errors,  7 Warnings.

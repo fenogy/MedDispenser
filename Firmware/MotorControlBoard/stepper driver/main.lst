@@ -1,0 +1,2577 @@
+CCS PCH C Compiler, Version 4.084, 38321               06-Mar-13 09:19
+
+               Filename: main.lst
+
+               ROM used: 3290 bytes (10%)
+                         Largest free fragment is 29474
+               RAM used: 390 (19%) at main() level
+                         411 (20%) worst case
+               Stack:    6 worst case (3 in main + 3 for interrupts)
+
+*
+0000:  GOTO   0A3E
+*
+0008:  MOVWF  05
+000A:  MOVFF  FD8,06
+000E:  MOVFF  FE0,07
+0012:  MOVLB  0
+0014:  MOVFF  FE9,0D
+0018:  MOVFF  FEA,08
+001C:  MOVFF  FE1,09
+0020:  MOVFF  FE2,0A
+0024:  MOVFF  FD9,0B
+0028:  MOVFF  FDA,0C
+002C:  MOVFF  FF3,14
+0030:  MOVFF  FF4,15
+0034:  MOVFF  FFA,16
+0038:  MOVFF  00,0F
+003C:  MOVFF  01,10
+0040:  MOVFF  02,11
+0044:  MOVFF  03,12
+0048:  MOVFF  04,13
+004C:  BTFSS  FF2.5
+004E:  GOTO   0058
+0052:  BTFSC  FF2.2
+0054:  GOTO   02EE
+0058:  BTFSS  F9D.5
+005A:  GOTO   0064
+005E:  BTFSC  F9E.5
+0060:  GOTO   029C
+0064:  BTFSS  F9D.4
+0066:  GOTO   0070
+006A:  BTFSC  F9E.4
+006C:  GOTO   02C6
+0070:  MOVFF  0F,00
+0074:  MOVFF  10,01
+0078:  MOVFF  11,02
+007C:  MOVFF  12,03
+0080:  MOVFF  13,04
+0084:  MOVFF  0D,FE9
+0088:  MOVFF  08,FEA
+008C:  BSF    08.7
+008E:  MOVFF  09,FE1
+0092:  MOVFF  0A,FE2
+0096:  MOVFF  0B,FD9
+009A:  MOVFF  0C,FDA
+009E:  MOVFF  14,FF3
+00A2:  MOVFF  15,FF4
+00A6:  MOVFF  16,FFA
+00AA:  MOVF   05,W
+00AC:  MOVFF  07,FE0
+00B0:  MOVFF  06,FD8
+00B4:  RETFIE 0
+.................... #include "main.h" 
+....................  
+.................... //#include <18F4550.h> 
+.................... //#device adc=8 
+.................... // 
+.................... //#FUSES NOWDT                    //No Watch Dog Timer 
+.................... //#FUSES WDT128                   //Watch Dog Timer uses 1:128 Postscale 
+.................... //#FUSES HSPLL                    //High Speed Crystal/Resonator with PLL enabled 
+.................... //#FUSES NOPROTECT                //Code not protected from reading 
+.................... //#FUSES NOBROWNOUT               //No brownout reset 
+.................... //#FUSES BORV20                   //Brownout reset at 2.0V 
+.................... //#FUSES NOPUT                    //No Power Up Timer 
+.................... //#FUSES NOCPD                    //No EE protection 
+.................... //#FUSES STVREN                   //Stack full/underflow will cause reset 
+.................... //#FUSES DEBUG                    //Debug mode for use with ICD 
+.................... //#FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... //#FUSES NOWRT                    //Program memory not write protected 
+.................... //#FUSES NOWRTD                   //Data EEPROM not write protected 
+.................... //#FUSES IESO                     //Internal External Switch Over mode enabled 
+.................... //#FUSES FCMEN                    //Fail-safe clock monitor enabled 
+.................... //#FUSES PBADEN                   //PORTB pins are configured as analog input channels on RESET 
+.................... //#FUSES NOWRTC                   //configuration not registers write protected 
+.................... //#FUSES NOWRTB                   //Boot block not write protected 
+.................... //#FUSES NOEBTR                   //Memory not protected from table reads 
+.................... //#FUSES NOEBTRB                  //Boot block not protected from table reads 
+.................... //#FUSES NOCPB                    //No Boot Block code protection 
+.................... //#FUSES MCLR                     //Master Clear pin enabled 
+.................... //#FUSES LPT1OSC                  //Timer1 configured for low-power operation 
+.................... //#FUSES NOXINST                  //Extended set extension and Indexed Addressing mode disabled (Legacy mode) 
+.................... //#FUSES PLL4                     //Divide By 4(16MHz oscillator input) 
+.................... //#FUSES CPUDIV3                  //System Clock by 4 
+.................... //#FUSES USBDIV                   //USB clock source comes from PLL divide by 2 
+.................... //#FUSES VREGEN                   //USB voltage regulator enabled 
+.................... //#FUSES NOICPRT                  //ICPRT disabled 
+.................... #include <18F4550.h> 
+.................... //////// Standard Header file for the PIC18F4550 device //////////////// 
+.................... #device PIC18F4550 
+.................... #list 
+....................  
+.................... #device adc=8 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES WDT128                	//Watch Dog Timer uses 1:128 Postscale 
+.................... #FUSES HS                    	//Crystal osc <= 4mhz for PCM/PCH , 3mhz to 10 mhz for PCD 
+.................... #FUSES NOPROTECT             	//Code not protected from reading 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES BORV20                	//Brownout reset at 2.0V 
+.................... #FUSES NOPUT                 	//No Power Up Timer 
+.................... #FUSES NOCPD                 	//No EE protection 
+.................... #FUSES STVREN                	//Stack full/underflow will cause reset 
+.................... #FUSES DEBUG               		//No Debug mode for ICD 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOWRT                 	//Program memory not write protected 
+.................... #FUSES NOWRTD                	//Data EEPROM not write protected 
+.................... #FUSES IESO                  	//Internal External Switch Over mode enabled 
+.................... #FUSES FCMEN                 	//Fail-safe clock monitor enabled 
+.................... #FUSES PBADEN                	//PORTB pins are configured as analog input channels on RESET 
+.................... #FUSES NOWRTC                	//configuration not registers write protected 
+.................... #FUSES NOWRTB                	//Boot block not write protected 
+.................... #FUSES NOEBTR                	//Memory not protected from table reads 
+.................... #FUSES NOEBTRB               	//Boot block not protected from table reads 
+.................... #FUSES NOCPB                 	//No Boot Block code protection 
+.................... #FUSES MCLR                  	//Master Clear pin enabled 
+.................... #FUSES LPT1OSC               	//Timer1 configured for low-power operation 
+.................... #FUSES NOXINST               	//Extended set extension and Indexed Addressing mode disabled (Legacy mode) 
+.................... #FUSES PLL12                 	//Divide By 12(48MHz oscillator input) 
+.................... #FUSES CPUDIV1               	//System Clock by 4 
+.................... #FUSES USBDIV                	//USB clock source comes from PLL divide by 2 
+.................... #FUSES VREGEN                	//USB voltage regulator enabled 
+.................... #FUSES NOICPRT                 	//ICPRT enabled 
+.................... // 
+.................... #use delay(clock=8000000) 
+05D8:  MOVLW  01
+05DA:  MOVWF  FEA
+05DC:  MOVLW  86
+05DE:  MOVWF  FE9
+05E0:  MOVF   FEF,W
+05E2:  BZ    05FE
+05E4:  MOVLW  02
+05E6:  MOVWF  01
+05E8:  CLRF   00
+05EA:  DECFSZ 00,F
+05EC:  BRA    05EA
+05EE:  DECFSZ 01,F
+05F0:  BRA    05E8
+05F2:  MOVLW  97
+05F4:  MOVWF  00
+05F6:  DECFSZ 00,F
+05F8:  BRA    05F6
+05FA:  DECFSZ FEF,F
+05FC:  BRA    05E4
+05FE:  GOTO   0C3C (RETURN)
+.................... #use rs232(baud=38400,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8) 
+*
+04C8:  BTFSS  F9E.4
+04CA:  BRA    04C8
+04CC:  MOVWF  FAD
+04CE:  RETLW  00
+....................  
+.................... #BYTE PORTB = 0x0F81 
+.................... #BYTE PORTE = 0x0F84 
+....................  
+.................... #include <string.h> 
+.................... //////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2008 Custom Computer Services            //// 
+.................... //// This source code may only be used by licensed users of the CCS C   //// 
+.................... //// compiler.  This source code may only be distributed to other       //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction  //// 
+.................... //// or distribution is permitted without written permission.           //// 
+.................... //// Derivative programs created using this software in object code     //// 
+.................... //// form are not restricted in any way.                                //// 
+.................... //////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #ifndef _STRING 
+.................... #define _STRING 
+.................... #include <stddef.h> 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2003 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #ifndef _STDDEF 
+....................  
+.................... #define _STDDEF 
+....................  
+.................... #if sizeof(unsigned int8 *)==1 
+.................... #define ptrdiff_t unsigned int8 
+.................... #else 
+.................... #define ptrdiff_t unsigned int16 
+.................... #endif 
+....................  
+.................... #define size_t unsigned int8 
+.................... #define wchar_t char 
+.................... #define NULL 0 
+....................  
+.................... #define offsetof(s,f) (offsetofbit(s,f)/8) 
+....................  
+.................... #endif 
+....................  
+.................... #include <ctype.h> 
+.................... //////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2003 Custom Computer Services            //// 
+.................... //// This source code may only be used by licensed users of the CCS C   //// 
+.................... //// compiler.  This source code may only be distributed to other       //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction  //// 
+.................... //// or distribution is permitted without written permission.           //// 
+.................... //// Derivative programs created using this software in object code     //// 
+.................... //// form are not restricted in any way.                                //// 
+.................... //////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #ifndef _CTYPE 
+.................... #define _CTYPE 
+....................  
+.................... #define islower(x)  isamong(x,"abcdefghijklmnopqrstuvwxyz") 
+.................... #define isupper(x)  isamong(x,"ABCDEFGHIJKLMNOPQRSTUVWXYZ") 
+.................... #define isalnum(x)  isamong(x,"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz") 
+.................... #define isalpha(x)  isamong(x,"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz") 
+.................... #define isdigit(x)  isamong(x,"0123456789") 
+.................... #define isspace(x)  ((x)==' ') 
+.................... #define isxdigit(x) isamong(x,"0123456789ABCDEFabcdef") 
+.................... #define iscntrl(x)  ((x)<' ') 
+.................... #define isprint(x)  ((x)>=' ') 
+.................... #define isgraph(x)  ((x)>' ') 
+.................... #define ispunct(x)  (((x)>' ')&&!isalnum(x)) 
+....................  
+.................... #endif 
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... ////////////////////////////////////////////// 
+.................... //// Uncomment the following define to    //// 
+.................... //// allow some functions to use a        //// 
+.................... //// quicker algorithm, but use more ROM  //// 
+.................... ////                                      //// 
+.................... //// #define FASTER_BUT_MORE_ROM          //// 
+.................... ////////////////////////////////////////////// 
+....................  
+....................  
+....................  
+.................... /*Copying functions*/ 
+.................... /* standard template: 
+....................    void *memmove(void *s1, void *s2, size_t n). 
+....................    Copies max of n characters safely (not following ending '\0') 
+....................    from s2 in s1; if s2 has less than n characters, appends 0 */ 
+....................  
+.................... char *memmove(void *s1,char *s2,size_t n) 
+.................... { 
+....................    char *sc1; 
+....................    char *sc2; 
+....................    sc1=s1; 
+....................    sc2=s2; 
+....................    if(sc2<sc1 && sc1 <sc2 +n) 
+....................       for(sc1+=n,sc2+=n;0<n;--n) 
+....................          *--sc1=*--sc2; 
+....................    else 
+....................       for(;0<n;--n) 
+....................          *sc1++=*sc2++; 
+....................   return s1; 
+....................   } 
+....................  
+.................... /* Standard template: char *strcpy(char *s1, const char *s2) 
+....................    copies the string s2 including the null character to s1. 
+....................    This is a compiler built in to handle the different address 
+....................    spaces */ 
+....................  
+.................... #define strcopy strcpy 
+....................  
+.................... /* standard template: 
+....................    char *strncpy(char *s1, const char *s2, size_t n). 
+....................    Copies max of n characters (not following ending '\0') 
+....................    from s2 in s1; if s2 has less than n characters, appends 0 */ 
+....................  
+.................... char *strncpy(char *s1, char *s2, size_t n) 
+.................... { 
+....................   char *s; 
+....................  
+....................   for (s = s1; n > 0 && *s2 != '\0'; n--) 
+....................      *s++ = *s2++; 
+....................   for (; n > 0; n--) 
+....................      *s++ = '\0'; 
+....................  
+....................   return(s1); 
+.................... } 
+.................... /***********************************************************/ 
+....................  
+.................... /*concatenation functions*/ 
+.................... /* standard template: char *strcat(char *s1, const char *s2) 
+.................... appends s2 to s1*/ 
+....................  
+.................... char *strcat(char *s1, char *s2) 
+.................... { 
+....................    char *s; 
+....................  
+....................    for (s = s1; *s != '\0'; ++s); 
+....................    while(*s2 != '\0') 
+....................    { 
+....................       *s = *s2; 
+....................       ++s; 
+....................       ++s2; 
+....................    } 
+....................  
+....................    *s = '\0'; 
+....................    return(s1); 
+.................... } 
+.................... /* standard template: char *strncat(char *s1, char *s2,size_t n) 
+.................... appends not more than n characters from s2 to s1*/ 
+....................  
+.................... char *strncat(char *s1, char *s2, size_t n) 
+.................... { 
+....................    char *s; 
+....................  
+....................    for (s = s1; *s != '\0'; ++s); 
+....................    while(*s2 != '\0' && 0<n) 
+....................    { 
+....................       *s = *s2; 
+....................       ++s; 
+....................       ++s2; 
+....................       --n; 
+....................    } 
+....................  
+....................    *s = '\0'; 
+....................    return(s1); 
+.................... } 
+....................  
+.................... /***********************************************************/ 
+....................  
+....................  
+.................... /*comparison functions*/ 
+.................... /* standard template: signed int memcmp(void *s1, void *s2). 
+....................    Compares s1 & s2; returns -1 if s1<s2, 0 if s1=s2, 1 if s1>s2 */ 
+....................  
+.................... signed int8 memcmp(void * s1,char *s2,size_t n) 
+.................... { 
+.................... char *su1, *su2; 
+.................... for(su1=s1, su2=s2; 0<n; ++su1, ++su2, --n) 
+.................... { 
+....................    if(*su1!=*su2) 
+....................       return ((*su1<*su2)?-1:+1); 
+.................... } 
+.................... return 0; 
+.................... } 
+....................  
+.................... /* standard template: int strcmp(const char *s1, const char *s2). 
+....................    Compares s1 & s2; returns -1 if s1<s2, 0 if s1=s2, 1 if s1>s2 */ 
+....................  
+.................... signed int8 strcmp(char *s1, char *s2) 
+.................... { 
+....................    for (; *s1 == *s2; s1++, s2++) 
+....................       if (*s1 == '\0') 
+....................          return(0); 
+....................    return((*s1 < *s2) ? -1: 1); 
+.................... } 
+.................... /* standard template: int strcoll(const char *s1, const char *s2). 
+....................    Compares s1 & s2; returns -1 if s1<s2, 0 if s1=s2, 1 if s1>s2 */ 
+....................  
+.................... signed int8 strcoll(char *s1, char *s2) 
+.................... { 
+....................    for (; *s1 == *s2; s1++, s2++) 
+....................       if (*s1 == '\0') 
+....................          return(0); 
+....................    return((*s1 < *s2) ? -1: 1); 
+.................... } 
+....................  
+.................... /* standard template: 
+....................    int strncmp(const char *s1, const char *s2, size_t n). 
+....................    Compares max of n characters (not following 0) from s1 to s2; 
+....................    returns same as strcmp */ 
+....................  
+.................... signed int8 strncmp(char *s1, char *s2, size_t n) 
+.................... { 
+....................    for (; n > 0; s1++, s2++, n--) 
+....................       if (*s1 != *s2) 
+....................          return((*s1 <*s2) ? -1: 1); 
+....................       else if (*s1 == '\0') 
+....................          return(0); 
+....................    return(0); 
+.................... } 
+.................... /* standard template: 
+....................    int strxfrm(const char *s1, const char *s2, size_t n). 
+....................    transforms maximum of n characters from s2 and places them into s1*/ 
+.................... size_t strxfrm(char *s1, char *s2, size_t n) 
+.................... { 
+....................   char *s; 
+....................   unsigned int8 n1; 
+....................   n1=n; 
+....................   for (s = s1; n > 0 && *s2 != '\0'; n--) 
+....................      *s++ = *s2++; 
+....................   for (; n > 0; n--) 
+....................      *s++ = '\0'; 
+....................  
+....................   return(n1); 
+.................... } 
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... /***********************************************************/ 
+.................... /*Search functions*/ 
+.................... /* standard template: void *memchr(const char *s, int c). 
+....................    Finds first occurrence of c in n characters of s */ 
+....................  
+.................... char *memchr(void *s,unsigned int8 c,size_t n) 
+.................... { 
+....................    char uc; 
+....................    char *su; 
+....................    uc=c; 
+....................    for(su=s;0<n;++su,--n) 
+....................       if(*su==uc) 
+....................       return su; 
+....................    return NULL; 
+.................... } 
+....................  
+.................... /* standard template: char *strchr(const char *s, int c). 
+....................    Finds first occurrence of c in s */ 
+....................  
+.................... char *strchr(char *s, unsigned int8 c) 
+.................... { 
+....................    for (; *s != c; s++) 
+....................       if (*s == '\0') 
+....................          return(0); 
+....................    return(s); 
+.................... } 
+.................... /* standard template: 
+....................    size_t strcspn(const char *s1, const char *s2). 
+....................    Computes length of max initial segment of s1 that 
+....................    consists entirely of characters NOT from s2*/ 
+....................  
+.................... unsigned int8  strcspn(char *s1, char *s2) 
+.................... { 
+....................    char *sc1, *sc2; 
+....................  
+....................    for (sc1 = s1; *sc1 != 0; sc1++) 
+....................       for (sc2 = s2; *sc2 != 0; sc2++) 
+....................          if (*sc1 == *sc2) 
+....................             return(sc1 - s1); 
+....................    return(sc1 - s1); 
+.................... } 
+.................... /* standard template: 
+....................    char *strpbrk(const char *s1, const char *s2). 
+....................    Locates first occurence of any character from s2 in s1; 
+....................    returns s1 if s2 is empty string */ 
+....................  
+.................... char *strpbrk(char *s1, char *s2) 
+.................... { 
+....................    char *sc1, *sc2; 
+....................  
+....................    for (sc1 = s1; *sc1 != 0; sc1++) 
+....................       for (sc2 = s2; *sc2 != 0; sc2++) 
+....................          if (*sc1 == *sc2) 
+....................             return(sc1); 
+....................    return(0); 
+.................... } 
+....................  
+....................  
+.................... /* standard template: char *strrchr(const char *s, int c). 
+....................    Finds last occurrence of c in s */ 
+....................  
+.................... char *strrchr(char *s, unsigned int8 c) 
+.................... { 
+....................    char *p; 
+....................  
+....................    for (p = 0; ; s++) 
+....................    { 
+....................       if (*s == c) 
+....................          p = s; 
+....................       if (*s == '\0') 
+....................          return(p); 
+....................    } 
+.................... } 
+.................... /* computes length of max initial segment of s1 consisting 
+....................    entirely of characters from s2 */ 
+....................  
+.................... unsigned int8  strspn(char *s1, char *s2) 
+.................... { 
+....................    char *sc1, *sc2; 
+....................  
+....................    for (sc1 = s1; *sc1 != 0; sc1++) 
+....................       for (sc2 = s2; ; sc2++) 
+....................     if (*sc2 == '\0') 
+....................        return(sc1 - s1); 
+....................          else if (*sc1 == *sc2) 
+....................             break; 
+....................    return(sc1 - s1); 
+.................... } 
+.................... /* standard template: 
+....................    char *strstr(const char *s1, const char *s2); 
+....................    Locates first occurence of character sequence s2 in s1; 
+....................    returns 0 if s2 is empty string 
+....................  
+....................    Uncomment #define FASTER_BUT_MORE_ROM at the top of the 
+....................    file to use the faster algorithm */ 
+.................... char *strstr(char *s1, char *s2) 
+.................... { 
+....................    char *s, *t; 
+....................  
+....................    #ifdef FASTER_BUT_MORE_ROM 
+....................    if (*s2 == '\0') 
+....................          return(s1); 
+....................    #endif 
+....................  
+....................    while (*s1) 
+....................    { 
+....................       for(s = s1, t = s2; *t && (*s == *t); ++s, ++t); 
+....................  
+....................       if (*t == '\0') 
+....................          return s1; 
+....................       ++s1; 
+....................       #ifdef FASTER_BUT_MORE_ROM 
+....................          while(*s1 != '\0' && *s1 != *s2) 
+....................             ++s1; 
+....................       #endif 
+....................    } 
+....................    return 0; 
+.................... } 
+....................  
+.................... /* standard template: char *strtok(char *s1, const char *s2). 
+....................  
+....................    Finds next token in s1 delimited by a character from separator 
+....................    string s2 (which can be different from call to call).  First call 
+....................    starts at beginning of s1 searching for first character NOT 
+....................    contained in s2; returns 0 if none is found. 
+....................    If one is found, it is the start of first token (return value). 
+....................    Function then searches from there for a character contained in s2. 
+....................    If none is found, current token extends to end of s1, and subsequent 
+....................    searches for a token will return 0.  If one is found, it is 
+....................    overwritten by '\0', which terminates current token.  Function saves 
+....................    pointer to following character from which next search will start. 
+....................    Each subsequent call, with 0 as first argument, starts searching 
+....................    from saved pointer */ 
+....................  
+.................... char *strtok(char *s1, char *s2) 
+.................... { 
+....................    char *beg, *end; 
+....................    static char *save; 
+....................  
+....................    beg = (s1)? s1: save; 
+....................    beg += strspn(beg, s2); 
+....................    if (*beg == '\0') 
+....................    { 
+....................       *save = ' '; 
+....................       return(0); 
+....................    } 
+....................    end = strpbrk(beg, s2); 
+....................    if (*end != '\0') 
+....................    { 
+....................       *end = '\0'; 
+....................       end++; 
+....................    } 
+....................    save = end; 
+....................    return(beg); 
+.................... } 
+....................  
+.................... /*****************************************************************/ 
+.................... /*Miscellaneous functions*/ 
+.................... /* standard template 
+.................... maps error number in errnum to an error message string 
+.................... Returns: Pointer to string 
+.................... */ 
+.................... #ifdef _ERRNO 
+.................... char * strerror(unsigned int8 errnum) 
+.................... { 
+.................... char s[15]; 
+.................... switch( errnum) 
+.................... { 
+.................... case 0: 
+....................    strcpy(s,"no errors"); 
+....................    return s; 
+.................... case EDOM : 
+....................    strcpy(s,"domain error"); 
+....................    return s; 
+.................... case ERANGE: 
+....................    strcpy(s,"range error"); 
+....................    return s; 
+.................... } 
+.................... } 
+.................... #ENDIF 
+.................... /* standard template: size_t strlen(const char *s). 
+....................    Computes length of s1 (preceding terminating 0) */ 
+....................  
+.................... unsigned int8 strlen(char *s) 
+.................... { 
+....................    char *sc; 
+....................  
+....................    for (sc = s; *sc != 0; sc++); 
+*
+09CC:  MOVFF  188,18A
+09D0:  MOVFF  187,189
+09D4:  MOVFF  18A,03
+09D8:  MOVLB  1
+09DA:  MOVFF  189,FE9
+09DE:  MOVFF  18A,FEA
+09E2:  MOVF   FEF,F
+09E4:  BZ    09F2
+09E6:  INCF   x89,F
+09E8:  BTFSC  FD8.2
+09EA:  INCF   x8A,F
+09EC:  MOVLB  0
+09EE:  BRA    09D4
+09F0:  MOVLB  1
+....................    return(sc - s); 
+09F2:  MOVF   x87,W
+09F4:  SUBWF  x89,W
+09F6:  MOVWF  00
+09F8:  MOVF   x88,W
+09FA:  SUBWFB x8A,W
+09FC:  MOVWF  03
+09FE:  MOVFF  00,01
+.................... } 
+0A02:  MOVLB  0
+0A04:  GOTO   0A1A (RETURN)
+....................  
+.................... /* standard template: size_t stricmp(const char *s1, const char *s2). 
+....................    Compares s1 to s2 ignoring case (upper vs. lower) */ 
+....................  
+.................... signed int8 stricmp(char *s1, char *s2) 
+.................... { 
+....................  for(; *s1==*s2||(isalpha(*s1)&&isalpha(*s2)&&(*s1==*s2+32||*s2==*s1+32)); 
+....................     s1++, s2++) 
+....................     if (*s1 == '\0') 
+....................        return(0); 
+....................  return((*s1 < *s2) ? -1: 1); 
+.................... } 
+....................  
+....................  
+.................... /* standard template: char *strlwr(char *s). 
+....................    Replaces uppercase letters by lowercase; 
+....................    returns pointer to new string s */ 
+....................  
+.................... char *strlwr(char *s) 
+.................... { 
+....................    char *p; 
+....................  
+....................    for (p = s; *p != '\0'; p++) 
+....................       if (*p >= 'A' && *p <='Z') 
+....................          *p += 'a' - 'A'; 
+....................    return(s); 
+.................... } 
+....................  
+....................  
+.................... /************************************************************/ 
+....................  
+....................  
+.................... #endif 
+....................  
+.................... #include "HWManager.c" 
+....................  
+....................  
+.................... void HwPutc(char c);                      
+....................  
+.................... int8 hwTxFIFO[30];                                                  
+.................... int8 hwRxFIFO[16];  
+....................                                             
+.................... int8 hwTxStatus         = 0;  
+.................... int8 hwRxStatus         = 0; 
+.................... int8 hwTxPointer        = 0;   
+....................   
+.................... #BYTE  HWRXREG            =  0x0FAE   
+.................... #BYTE  HWTXREG            =  0x0FAD 
+....................                        
+....................  
+.................... #int_RDA  
+.................... void  RDA_isr(void)                       
+.................... {                                   
+....................   hwRxFIFO[hwRxStatus] = HWRXREG; 
+*
+029C:  CLRF   03
+029E:  MOVF   4A,W
+02A0:  ADDLW  39
+02A2:  MOVWF  FE9
+02A4:  MOVLW  00
+02A6:  ADDWFC 03,W
+02A8:  MOVWF  FEA
+02AA:  MOVFF  FAE,FEF
+....................                                                                           
+....................   hwRxStatus++; 
+02AE:  INCF   4A,F
+....................   HwPutc(HWRXREG);  
+02B0:  MOVFF  FAE,193
+02B4:  RCALL  0288
+....................   if(hwRxStatus>79){ 
+02B6:  MOVF   4A,W
+02B8:  SUBLW  4F
+02BA:  BC    02BE
+....................      hwRxStatus=0; 
+02BC:  CLRF   4A
+....................   } 
+....................                 
+....................    clear_interrupt(INT_RDA); 
+02BE:  BCF    F9E.5
+....................                                                       
+.................... }     
+....................  
+02C0:  BCF    F9E.5
+02C2:  GOTO   0070
+.................... #INT_TBE  
+.................... void TBE_isr() 
+.................... {    
+....................  
+....................     HWTXREG       = hwTxFIFO[hwTxPointer];  
+02C6:  CLRF   03
+02C8:  MOVF   4B,W
+02CA:  ADDLW  1B
+02CC:  MOVWF  FE9
+02CE:  MOVLW  00
+02D0:  ADDWFC 03,W
+02D2:  MOVWF  FEA
+02D4:  MOVFF  FEF,FAD
+....................                                              				// I added this 
+....................     hwTxStatus --;  
+02D8:  DECF   49,F
+....................     hwTxPointer++;   
+02DA:  INCF   4B,F
+....................  
+....................     hwTxStatus    &= 0x0F; 
+02DC:  MOVLW  0F
+02DE:  ANDWF  49,F
+....................                                 
+....................     enable_interrupts(INT_TBE);                            // Enable interrupts again 
+02E0:  BSF    F9D.4
+....................  
+....................     if(!hwTxStatus) 
+02E2:  MOVF   49,F
+02E4:  BNZ   02E8
+....................     { 
+....................     disable_interrupts(INT_TBE);          
+02E6:  BCF    F9D.4
+....................     }                                   
+.................... }                        
+....................  
+02E8:  BCF    F9E.4
+02EA:  GOTO   0070
+.................... void HwSerialTxFIFO(char *data, int8 length) 
+.................... {   int8 i; 
+....................     for(i = 0;i < length;i++) 
+*
+0240:  MOVLB  1
+0242:  CLRF   x97
+0244:  MOVF   x96,W
+0246:  SUBWF  x97,W
+0248:  BC    027C
+....................    {                            
+....................       hwTxFIFO[i] = data[i]; 
+024A:  CLRF   03
+024C:  MOVF   x97,W
+024E:  ADDLW  1B
+0250:  MOVWF  01
+0252:  MOVLW  00
+0254:  ADDWFC 03,F
+0256:  MOVFF  03,199
+025A:  CLRF   03
+025C:  MOVF   x97,W
+025E:  ADDWF  x94,W
+0260:  MOVWF  FE9
+0262:  MOVF   x95,W
+0264:  ADDWFC 03,W
+0266:  MOVWF  FEA
+0268:  MOVFF  FEF,19A
+026C:  MOVFF  199,FEA
+0270:  MOVFF  01,FE9
+0274:  MOVFF  19A,FEF
+....................    }  
+0278:  INCF   x97,F
+027A:  BRA    0244
+....................    hwTxStatus       = length;  
+027C:  MOVFF  196,49
+....................    hwTxPointer       = 0; 
+0280:  CLRF   4B
+....................     
+....................    enable_interrupts(INT_TBE);  
+0282:  BSF    F9D.4
+....................  
+.................... } 
+0284:  MOVLB  0
+0286:  RETLW  00
+....................  
+....................  
+.................... void HwPutc(char c){ 
+....................  
+....................    HwSerialTxFIFO(&c,1); 
+0288:  MOVLW  01
+028A:  MOVLB  1
+028C:  MOVWF  x95
+028E:  MOVLW  93
+0290:  MOVWF  x94
+0292:  MOVLW  01
+0294:  MOVWF  x96
+0296:  MOVLB  0
+0298:  RCALL  0240
+....................  
+.................... } 
+029A:  RETLW  00
+....................  
+.................... #include "Kernal.c" 
+....................  
+.................... #define C1	10 
+.................... #define C2	20 
+.................... #define C3	30 
+.................... #define C4	40 
+.................... #define C5	50 
+.................... #define C6	60 
+.................... #define C7	70 
+.................... #define C8	80 
+....................  
+.................... void ClearLaserTxBuffer(); 
+.................... void ClearLaserRxBuffer(); 
+.................... void ClearLaserSubString(); 
+....................  
+.................... int8 startIndex; 
+.................... int8 endIndex; 
+.................... int8 tempIndex; 
+.................... char LaserSubString[16]; 
+....................  
+.................... int8 colon1Received; 
+.................... int8 enterReceived; 
+.................... int8 commandLength = 0; 
+.................... int8 Cmd = 255; 
+.................... int8 Target = 255; 
+.................... extern unsigned int8 oldTarget; 
+....................  
+.................... struct Command{ 
+....................  
+....................  
+.................... 	short availableFlag; 
+.................... 	short cmdChopped; 
+....................  
+.................... 	char Command[3]; 
+.................... 	char *ptrValues[36]; 
+.................... 	int32  Values[12]; 
+.................... 	char errString[36]; 
+.................... 	char strValues[12][8]; 
+....................  
+.................... } currentCommand;   
+....................  
+....................  
+.................... void Kernal(){ 
+.................... 		 
+.................... 	int i = 0; 
+*
+064C:  MOVLB  1
+064E:  CLRF   x84
+.................... 	int j = 0; 
+0650:  CLRF   x85
+.................... 	int k = 0; 
+0652:  CLRF   x86
+....................  
+.................... 	int noOfColons = 0; 
+0654:  CLRF   x87
+.................... 	int noOfEnters = 0; 
+0656:  CLRF   x88
+.................... 	int1 isCommandSuspect= 0; 
+0658:  BCF    x89.0
+....................  
+.................... 	colon1Received = 0; 
+065A:  CLRF   5F
+.................... 	enterReceived = 0; 
+065C:  MOVLB  0
+065E:  CLRF   x60
+.................... 	 
+.................... 	while(k<16){																	// Swipe through the FIFO 
+0660:  MOVLB  1
+0662:  MOVF   x86,W
+0664:  SUBLW  0F
+0666:  BNC   0698
+....................  
+.................... 		switch(hwRxFIFO[k]){ 
+0668:  CLRF   03
+066A:  MOVF   x86,W
+066C:  ADDLW  39
+066E:  MOVWF  FE9
+0670:  MOVLW  00
+0672:  ADDWFC 03,W
+0674:  MOVWF  FEA
+0676:  MOVF   FEF,W
+0678:  XORLW  3E
+067A:  MOVLB  0
+067C:  BZ    0684
+067E:  XORLW  33
+0680:  BZ    068A
+0682:  BRA    0690
+....................  
+.................... 			case	'>'	:	noOfColons++;											// Mark if a colon is received 
+0684:  MOVLB  1
+0686:  INCF   x87,F
+.................... 							break; 
+0688:  BRA    0694
+.................... 			case	0x0D:	noOfEnters++;											// Mark is an Enter is received // CHANGED FROM 0X0D TO 0X0A ON 2009.09.23 
+068A:  MOVLB  1
+068C:  INCF   x88,F
+.................... 							break; 
+068E:  BRA    0694
+.................... 			default		:   break; 
+0690:  MOVLB  1
+0692:  BRA    0694
+.................... 	 
+.................... 		} 
+....................  
+.................... 		k++; 
+0694:  INCF   x86,F
+.................... 	} 
+0696:  BRA    0662
+....................  
+.................... 	if((noOfColons == 1)){ 
+0698:  DECFSZ x87,W
+069A:  BRA    06A2
+.................... 	if((noOfEnters == 1)){ 
+069C:  DECFSZ x88,W
+069E:  BRA    06A2
+....................  
+.................... 			isCommandSuspect = TRUE; 
+06A0:  BSF    x89.0
+.................... 	} 
+.................... 	} 
+....................  
+.................... 	if((noOfColons > 1) || (noOfEnters > 1)){										// if junk received we clear the buffer here 
+06A2:  MOVF   x87,W
+06A4:  SUBLW  01
+06A6:  BNC   06AE
+06A8:  MOVF   x88,W
+06AA:  SUBLW  01
+06AC:  BC    06BA
+.................... 	 
+.................... 			ClearLaserRxBuffer();									 				// commented on 2009.09.21 due to a problem 
+06AE:  MOVLB  0
+06B0:  RCALL  0602
+.................... 			noOfColons = 0;															// Edited on 2010.12.28 
+06B2:  MOVLB  1
+06B4:  CLRF   x87
+.................... 			noOfEnters = 0; 
+06B6:  CLRF   x88
+.................... 			return; 
+06B8:  BRA    099E
+.................... 	} 
+....................  
+....................  
+.................... 	if(isCommandSuspect == TRUE){													// we process more if the command format is correct 
+06BA:  BTFSS  x89.0
+06BC:  BRA    0790
+....................  
+.................... 	 
+....................  		while((tempIndex<16)&&(currentCommand.availableFlag==FALSE)){  // this loop will swipe through the Laser buffer for a valid command 
+06BE:  MOVF   4E,W
+06C0:  SUBLW  0F
+06C2:  BNC   078E
+06C4:  MOVLB  0
+06C6:  BTFSS  x65.0
+06C8:  BRA    06CE
+06CA:  MOVLB  1
+06CC:  BRA    078E
+....................  
+.................... 			 
+.................... 			if((hwRxFIFO[tempIndex]=='>') && colon1Received==0){ 
+06CE:  CLRF   03
+06D0:  MOVF   4E,W
+06D2:  ADDLW  39
+06D4:  MOVWF  FE9
+06D6:  MOVLW  00
+06D8:  ADDWFC 03,W
+06DA:  MOVWF  FEA
+06DC:  MOVF   FEF,W
+06DE:  SUBLW  3E
+06E0:  BNZ   06F8
+06E2:  MOVF   5F,F
+06E4:  BNZ   06F8
+.................... 			 
+.................... 				#ASM 
+.................... 				nop; 
+06E6:  NOP   
+.................... 				nop; 
+06E8:  NOP   
+.................... 				nop; 
+06EA:  NOP   
+.................... 				nop; 
+06EC:  NOP   
+.................... 				#ENDASM 
+....................  
+.................... 				colon1Received=10; 
+06EE:  MOVLW  0A
+06F0:  MOVWF  5F
+.................... 				startIndex=tempIndex+1; 
+06F2:  MOVLW  01
+06F4:  ADDWF  4E,W
+06F6:  MOVWF  4C
+.................... 			} 
+....................  
+.................... 			if((hwRxFIFO[tempIndex]==0x0d) && (colon1Received == 10) && (enterReceived==0)){ 
+06F8:  CLRF   03
+06FA:  MOVF   4E,W
+06FC:  ADDLW  39
+06FE:  MOVWF  FE9
+0700:  MOVLW  00
+0702:  ADDWFC 03,W
+0704:  MOVWF  FEA
+0706:  MOVF   FEF,W
+0708:  SUBLW  0D
+070A:  BNZ   071E
+070C:  MOVF   5F,W
+070E:  SUBLW  0A
+0710:  BNZ   071E
+0712:  MOVF   x60,F
+0714:  BNZ   071E
+....................  
+.................... 				enterReceived=10; 
+0716:  MOVLW  0A
+0718:  MOVWF  x60
+.................... 				endIndex=tempIndex; 
+071A:  MOVFF  4E,4D
+.................... 			} 
+....................  
+....................  
+.................... 			if(colon1Received==10 && enterReceived==10){ 
+071E:  MOVF   5F,W
+0720:  SUBLW  0A
+0722:  BNZ   0788
+0724:  MOVF   x60,W
+0726:  SUBLW  0A
+0728:  BNZ   0788
+....................  
+.................... 				colon1Received=0; 
+072A:  CLRF   5F
+.................... 				enterReceived =0; 
+072C:  CLRF   x60
+.................... 				currentCommand.availableFlag=TRUE;			 
+072E:  BSF    x65.0
+....................  	  			clearLaserSubString();	 
+0730:  RCALL  062A
+....................  
+.................... 																					// NOW WE DELETE ANY PREVIOUS COMMAND 
+....................         		if((startIndex<endIndex)){         									// This is true when a command not extends back begining of the array 
+0732:  MOVF   4D,W
+0734:  SUBWF  4C,W
+0736:  BC    0788
+....................          
+....................         			for(i=startIndex,j=0;i<=endIndex;i++,j++){    							// just copy it n take it seperately 
+0738:  MOVFF  4C,184
+073C:  MOVLB  1
+073E:  CLRF   x85
+0740:  MOVF   x84,W
+0742:  SUBWF  4D,W
+0744:  BNC   077E
+....................  
+.................... 						LaserSubString[j]=HwRxFIFO[(startIndex+j)]; 
+0746:  CLRF   03
+0748:  MOVF   x85,W
+074A:  ADDLW  4F
+074C:  MOVWF  01
+074E:  MOVLW  00
+0750:  ADDWFC 03,F
+0752:  MOVFF  03,18B
+0756:  MOVF   x85,W
+0758:  ADDWF  4C,W
+075A:  CLRF   03
+075C:  ADDLW  39
+075E:  MOVWF  FE9
+0760:  MOVLW  00
+0762:  ADDWFC 03,W
+0764:  MOVWF  FEA
+0766:  MOVFF  FEF,18D
+076A:  MOVFF  18B,FEA
+076E:  MOVFF  01,FE9
+0772:  MOVFF  18D,FEF
+....................                 		 
+.................... 					} 
+0776:  MOVF   x84,W
+0778:  INCF   x84,F
+077A:  INCF   x85,F
+077C:  BRA    0740
+.................... 					commandLength = endIndex - startIndex; 
+077E:  MOVF   4C,W
+0780:  SUBWF  4D,W
+0782:  MOVLB  0
+0784:  MOVWF  x61
+.................... 					ClearLaserRxBuffer(); 
+0786:  RCALL  0602
+.................... 				} 
+.................... 			} 
+....................  
+....................     		tempIndex++; 
+0788:  INCF   4E,F
+.................... 		}	 
+078A:  MOVLB  1
+078C:  BRA    06BE
+.................... 		 
+.................... 		tempIndex=0; 
+078E:  CLRF   4E
+.................... 	} 
+....................  
+.................... 	if(currentCommand.availableFlag==TRUE){ 
+0790:  MOVLB  0
+0792:  BTFSS  x65.0
+0794:  BRA    099C
+....................  
+.................... 		if(LaserSubString[0] == 'C' && LaserSubString[1] == '1'){ 
+0796:  MOVF   4F,W
+0798:  SUBLW  43
+079A:  BNZ   07C8
+079C:  MOVF   50,W
+079E:  SUBLW  31
+07A0:  BNZ   07C8
+.................... 			Cmd = C1; 
+07A2:  MOVLW  0A
+07A4:  MOVWF  x62
+.................... 			Target = 1; 
+07A6:  MOVLW  01
+07A8:  MOVWF  x63
+.................... 			printf("Target 1"); 
+07AA:  MOVLB  1
+07AC:  CLRF   x8A
+07AE:  MOVF   x8A,W
+07B0:  MOVLB  0
+07B2:  RCALL  00B6
+07B4:  MOVLB  1
+07B6:  INCF   x8A,F
+07B8:  MOVLB  0
+07BA:  RCALL  04C8
+07BC:  MOVLW  08
+07BE:  MOVLB  1
+07C0:  SUBWF  x8A,W
+07C2:  BNZ   07AE
+.................... 		}else if(LaserSubString[0] == 'C' && LaserSubString[1] == '2'){ 
+07C4:  BRA    0998
+07C6:  MOVLB  0
+07C8:  MOVF   4F,W
+07CA:  SUBLW  43
+07CC:  BNZ   07FA
+07CE:  MOVF   50,W
+07D0:  SUBLW  32
+07D2:  BNZ   07FA
+.................... 			Cmd = C2; 
+07D4:  MOVLW  14
+07D6:  MOVWF  x62
+.................... 			Target = 2; 
+07D8:  MOVLW  02
+07DA:  MOVWF  x63
+.................... 			printf("Target 2"); 
+07DC:  MOVLB  1
+07DE:  CLRF   x8A
+07E0:  MOVF   x8A,W
+07E2:  MOVLB  0
+07E4:  RCALL  00DA
+07E6:  MOVLB  1
+07E8:  INCF   x8A,F
+07EA:  MOVLB  0
+07EC:  RCALL  04C8
+07EE:  MOVLW  08
+07F0:  MOVLB  1
+07F2:  SUBWF  x8A,W
+07F4:  BNZ   07E0
+.................... 		}else if(LaserSubString[0] == 'C' && LaserSubString[1] == '3'){ 
+07F6:  BRA    0998
+07F8:  MOVLB  0
+07FA:  MOVF   4F,W
+07FC:  SUBLW  43
+07FE:  BNZ   082C
+0800:  MOVF   50,W
+0802:  SUBLW  33
+0804:  BNZ   082C
+.................... 			Cmd = C3; 
+0806:  MOVLW  1E
+0808:  MOVWF  x62
+.................... 			Target = 3; 
+080A:  MOVLW  03
+080C:  MOVWF  x63
+.................... 			printf("Target 3"); 
+080E:  MOVLB  1
+0810:  CLRF   x8A
+0812:  MOVF   x8A,W
+0814:  MOVLB  0
+0816:  RCALL  00FE
+0818:  MOVLB  1
+081A:  INCF   x8A,F
+081C:  MOVLB  0
+081E:  RCALL  04C8
+0820:  MOVLW  08
+0822:  MOVLB  1
+0824:  SUBWF  x8A,W
+0826:  BNZ   0812
+.................... 		}else if(LaserSubString[0] == 'C' && LaserSubString[1] == '4'){ 
+0828:  BRA    0998
+082A:  MOVLB  0
+082C:  MOVF   4F,W
+082E:  SUBLW  43
+0830:  BNZ   085E
+0832:  MOVF   50,W
+0834:  SUBLW  34
+0836:  BNZ   085E
+.................... 			Cmd = C4; 
+0838:  MOVLW  28
+083A:  MOVWF  x62
+.................... 			Target = 4; 
+083C:  MOVLW  04
+083E:  MOVWF  x63
+.................... 			printf("Target 4"); 
+0840:  MOVLB  1
+0842:  CLRF   x8A
+0844:  MOVF   x8A,W
+0846:  MOVLB  0
+0848:  RCALL  0122
+084A:  MOVLB  1
+084C:  INCF   x8A,F
+084E:  MOVLB  0
+0850:  RCALL  04C8
+0852:  MOVLW  08
+0854:  MOVLB  1
+0856:  SUBWF  x8A,W
+0858:  BNZ   0844
+.................... 		}else if(LaserSubString[0] == 'C' && LaserSubString[1] == '5'){ 
+085A:  BRA    0998
+085C:  MOVLB  0
+085E:  MOVF   4F,W
+0860:  SUBLW  43
+0862:  BNZ   0890
+0864:  MOVF   50,W
+0866:  SUBLW  35
+0868:  BNZ   0890
+.................... 			Cmd = C5; 
+086A:  MOVLW  32
+086C:  MOVWF  x62
+.................... 			Target = 5; 
+086E:  MOVLW  05
+0870:  MOVWF  x63
+.................... 			printf("Target 5"); 
+0872:  MOVLB  1
+0874:  CLRF   x8A
+0876:  MOVF   x8A,W
+0878:  MOVLB  0
+087A:  RCALL  0146
+087C:  MOVLB  1
+087E:  INCF   x8A,F
+0880:  MOVLB  0
+0882:  RCALL  04C8
+0884:  MOVLW  08
+0886:  MOVLB  1
+0888:  SUBWF  x8A,W
+088A:  BNZ   0876
+.................... 		}else if(LaserSubString[0] == 'C' && LaserSubString[1] == '6'){ 
+088C:  BRA    0998
+088E:  MOVLB  0
+0890:  MOVF   4F,W
+0892:  SUBLW  43
+0894:  BNZ   08C2
+0896:  MOVF   50,W
+0898:  SUBLW  36
+089A:  BNZ   08C2
+.................... 			Cmd = C6; 
+089C:  MOVLW  3C
+089E:  MOVWF  x62
+.................... 			Target = 6; 
+08A0:  MOVLW  06
+08A2:  MOVWF  x63
+.................... 			printf("Target 6"); 
+08A4:  MOVLB  1
+08A6:  CLRF   x8A
+08A8:  MOVF   x8A,W
+08AA:  MOVLB  0
+08AC:  RCALL  016A
+08AE:  MOVLB  1
+08B0:  INCF   x8A,F
+08B2:  MOVLB  0
+08B4:  RCALL  04C8
+08B6:  MOVLW  08
+08B8:  MOVLB  1
+08BA:  SUBWF  x8A,W
+08BC:  BNZ   08A8
+.................... 		}else if(LaserSubString[0] == 'C' && LaserSubString[1] == '7'){ 
+08BE:  BRA    0998
+08C0:  MOVLB  0
+08C2:  MOVF   4F,W
+08C4:  SUBLW  43
+08C6:  BNZ   08F4
+08C8:  MOVF   50,W
+08CA:  SUBLW  37
+08CC:  BNZ   08F4
+.................... 			Cmd = C7; 
+08CE:  MOVLW  46
+08D0:  MOVWF  x62
+.................... 			Target = 7; 
+08D2:  MOVLW  07
+08D4:  MOVWF  x63
+.................... 			printf("Target 7"); 
+08D6:  MOVLB  1
+08D8:  CLRF   x8A
+08DA:  MOVF   x8A,W
+08DC:  MOVLB  0
+08DE:  RCALL  018E
+08E0:  MOVLB  1
+08E2:  INCF   x8A,F
+08E4:  MOVLB  0
+08E6:  RCALL  04C8
+08E8:  MOVLW  08
+08EA:  MOVLB  1
+08EC:  SUBWF  x8A,W
+08EE:  BNZ   08DA
+.................... 		}else if(LaserSubString[0] == 'C' && LaserSubString[1] == '8'){ 
+08F0:  BRA    0998
+08F2:  MOVLB  0
+08F4:  MOVF   4F,W
+08F6:  SUBLW  43
+08F8:  BNZ   0926
+08FA:  MOVF   50,W
+08FC:  SUBLW  38
+08FE:  BNZ   0926
+.................... 			Cmd = C8; 
+0900:  MOVLW  50
+0902:  MOVWF  x62
+.................... 			Target = 8; 
+0904:  MOVLW  08
+0906:  MOVWF  x63
+.................... 			printf("Target 8"); 
+0908:  MOVLB  1
+090A:  CLRF   x8A
+090C:  MOVF   x8A,W
+090E:  MOVLB  0
+0910:  RCALL  01B2
+0912:  MOVLB  1
+0914:  INCF   x8A,F
+0916:  MOVLB  0
+0918:  RCALL  04C8
+091A:  MOVLW  08
+091C:  MOVLB  1
+091E:  SUBWF  x8A,W
+0920:  BNZ   090C
+.................... 		}else if(LaserSubString[0] == 'S' && LaserSubString[1] == 'T'){ 
+0922:  BRA    0998
+0924:  MOVLB  0
+0926:  MOVF   4F,W
+0928:  SUBLW  53
+092A:  BNZ   099A
+092C:  MOVF   50,W
+092E:  SUBLW  54
+0930:  BNZ   099A
+....................  
+.................... 			if(oldTarget == Target){ 
+0932:  MOVF   x63,W
+0934:  SUBWF  x64,W
+0936:  BNZ   096A
+.................... 			printf("C%d,1\r\n",Target); 
+0938:  MOVLW  43
+093A:  RCALL  04C8
+093C:  MOVFF  63,18A
+0940:  MOVLW  1F
+0942:  MOVLB  1
+0944:  MOVWF  x8B
+0946:  MOVLB  0
+0948:  RCALL  04FC
+094A:  MOVLW  03
+094C:  MOVLB  1
+094E:  MOVWF  x8A
+0950:  MOVF   x8A,W
+0952:  MOVLB  0
+0954:  RCALL  01D6
+0956:  MOVLB  1
+0958:  INCF   x8A,F
+095A:  MOVLB  0
+095C:  RCALL  04C8
+095E:  MOVLW  07
+0960:  MOVLB  1
+0962:  SUBWF  x8A,W
+0964:  BNZ   0950
+.................... 			}else{ 
+0966:  BRA    0998
+0968:  MOVLB  0
+.................... 			printf("C%d,0\r\n",Target); 
+096A:  MOVLW  43
+096C:  RCALL  04C8
+096E:  MOVFF  63,18A
+0972:  MOVLW  1F
+0974:  MOVLB  1
+0976:  MOVWF  x8B
+0978:  MOVLB  0
+097A:  RCALL  04FC
+097C:  MOVLW  03
+097E:  MOVLB  1
+0980:  MOVWF  x8A
+0982:  MOVF   x8A,W
+0984:  MOVLB  0
+0986:  RCALL  01F8
+0988:  MOVLB  1
+098A:  INCF   x8A,F
+098C:  MOVLB  0
+098E:  RCALL  04C8
+0990:  MOVLW  07
+0992:  MOVLB  1
+0994:  SUBWF  x8A,W
+0996:  BNZ   0982
+0998:  MOVLB  0
+.................... 			} 
+.................... 		} 
+.................... 		currentCommand.availableFlag= FALSE;																			// we dont clear the laserSubstring here ...we clear it when a new command is available 
+099A:  BCF    x65.0
+099C:  MOVLB  1
+.................... 	} 
+.................... } 
+099E:  MOVLB  0
+09A0:  GOTO   0CC4 (RETURN)
+....................  
+.................... //void SDkernal(){ 
+.................... // 
+.................... //	int i,j; 
+.................... // 
+.................... //	for(i=0;i<32;i++){ 
+.................... // 
+.................... //		if( hwRxFIFO[i] == 0x0d){ 
+.................... // 
+.................... //			LaserCmd = 0;			 
+.................... ////			currentLaserCommand.Command[0] = hwRxFIFO[0]; 
+.................... ////			currentLaserCommand.Command[1] = hwRxFIFO[1]; 
+.................... //			 
+.................... //			for(j=0;j<=16;j++){   					 
+.................... //				LaserSubString[j]=HwRxFIFO[j]; 
+.................... //			} 
+.................... //       
+.................... //			currentLaserCommand.availableFlag=TRUE; 
+.................... // 
+.................... //			ClearLaserRxBuffer(); 
+.................... //			break; 
+.................... // 
+.................... //		} 
+.................... // 
+.................... //		if(hwRxFIFO[i] == '>'){ 
+.................... // 
+.................... //			ClearLaserRxBuffer(); 
+.................... //			return ; 
+.................... //		} 
+.................... // 
+.................... //      	} 
+.................... // 
+.................... //} 
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... void QueLaserBuffer(char* str){ 
+....................  
+.................... 	int i=0; 
+*
+0A08:  MOVLB  1
+0A0A:  CLRF   x86
+....................  
+.................... 	ClearLaserTxBuffer(); 
+0A0C:  MOVLB  0
+0A0E:  BRA    09A4
+....................  
+.................... 	i=strlen(str); 
+0A10:  MOVFF  185,188
+0A14:  MOVFF  184,187
+0A18:  BRA    09CC
+0A1A:  MOVFF  01,186
+0A1E:  CLRF   18
+0A20:  BTFSC  FF2.7
+0A22:  BSF    18.7
+0A24:  BCF    FF2.7
+.................... 	HwSerialTxFIFO(str,i); 
+0A26:  MOVFF  185,195
+0A2A:  MOVFF  184,194
+0A2E:  MOVFF  186,196
+0A32:  RCALL  0240
+0A34:  BTFSC  18.7
+0A36:  BSF    FF2.7
+.................... 	hwTxStatus=0; 
+0A38:  CLRF   49
+....................  
+.................... } 
+0A3A:  GOTO   0CD4 (RETURN)
+....................  
+.................... void ClearLaserTxBuffer(){ 
+.................... 	 
+.................... 	int i=0; 
+*
+09A4:  MOVLB  1
+09A6:  CLRF   x87
+....................  
+.................... 	for(i=0;i<16;i++){ 
+09A8:  CLRF   x87
+09AA:  MOVF   x87,W
+09AC:  SUBLW  0F
+09AE:  BNC   09C4
+....................  
+.................... 		hwTxFIFO[i]=0; 
+09B0:  CLRF   03
+09B2:  MOVF   x87,W
+09B4:  ADDLW  1B
+09B6:  MOVWF  FE9
+09B8:  MOVLW  00
+09BA:  ADDWFC 03,W
+09BC:  MOVWF  FEA
+09BE:  CLRF   FEF
+....................  
+.................... 	} 
+09C0:  INCF   x87,F
+09C2:  BRA    09AA
+....................     hwTxStatus=0; 
+09C4:  CLRF   49
+.................... } 
+09C6:  MOVLB  0
+09C8:  GOTO   0A10 (RETURN)
+....................  
+.................... void ClearLaserRxBuffer(){ 
+....................  
+.................... 	int i=0; 
+*
+0602:  MOVLB  1
+0604:  CLRF   x8A
+.................... 	hwRxStatus = 0; 
+0606:  CLRF   4A
+.................... 	for(i=0;i<16;i++){ 
+0608:  CLRF   x8A
+060A:  MOVF   x8A,W
+060C:  SUBLW  0F
+060E:  BNC   0624
+....................  
+.................... 		hwRxFIFO[i]=0; 
+0610:  CLRF   03
+0612:  MOVF   x8A,W
+0614:  ADDLW  39
+0616:  MOVWF  FE9
+0618:  MOVLW  00
+061A:  ADDWFC 03,W
+061C:  MOVWF  FEA
+061E:  CLRF   FEF
+....................  
+.................... 	} 
+0620:  INCF   x8A,F
+0622:  BRA    060A
+....................  
+....................     hwRxStatus=0; 
+0624:  CLRF   4A
+....................  
+.................... } 
+0626:  MOVLB  0
+0628:  RETLW  00
+....................  
+....................  
+.................... void ClearLaserSubString(){ 
+....................  
+.................... 	int i; 
+....................  
+.................... 	for(i=0;i<16;i++){ 
+062A:  MOVLB  1
+062C:  CLRF   x8A
+062E:  MOVF   x8A,W
+0630:  SUBLW  0F
+0632:  BNC   0648
+....................  
+.................... 	LaserSubString[i]=0; 
+0634:  CLRF   03
+0636:  MOVF   x8A,W
+0638:  ADDLW  4F
+063A:  MOVWF  FE9
+063C:  MOVLW  00
+063E:  ADDWFC 03,W
+0640:  MOVWF  FEA
+0642:  CLRF   FEF
+....................  
+.................... 	} 
+0644:  INCF   x8A,F
+0646:  BRA    062E
+.................... } 
+0648:  MOVLB  0
+064A:  RETLW  00
+....................  
+....................  
+.................... #define ZERO	PIN_D0 
+....................  
+.................... #define ONE		PIN_D7 
+.................... #define TWO		PIN_D6 
+.................... #define THREE	PIN_D5 
+.................... #define FOUR	PIN_D4 
+....................  
+.................... #define POS1	10 
+.................... #define POS2	20 
+.................... #define POS3	30 
+.................... #define POS4	40 
+.................... #define STOP	50 
+....................  
+.................... #define MOTOR_DIR_CW  10 
+.................... #define MOTOR_DIR_CCW 20 
+.................... #define MOTOR_HALT    50 
+....................  
+.................... #define TRUE	1 
+.................... #define FALSE	0 
+....................  
+.................... #define SENSOR1 PIN_E2 
+.................... #define SENSOR2 PIN_E1 
+.................... #define SENSOR3 PIN_E0 
+....................  
+.................... unsigned int16 StepDly = 8; 
+.................... unsigned int8 flag = 0; 
+.................... unsigned int8 motorState =  POS1; 
+.................... unsigned int8 motorRotation = 255; 
+.................... unsigned int8 sensorVal = 0; 
+.................... unsigned int16 TickCount = 0; 
+.................... unsigned int8 sampleArray[8] = {0,0,0,0,0,0,0,0}; 
+.................... unsigned int8 fineTuning[8] = {0,0,0,0,0,0,0,0}; 
+.................... unsigned int8 prevState = 255; 
+.................... unsigned int8 currState = 255; 
+.................... unsigned int8 prevPinB0 = 255; 
+.................... unsigned int8 currPinB0 = 255; 
+.................... unsigned int8 i = 0; 
+.................... unsigned int8 oldTarget = 255; 
+.................... int1 fillSampleArray = FALSE; 
+.................... int8 x = 0; 
+....................  
+.................... void CW(); 
+.................... int8 ProcessSampleArray(int8 *t); 
+....................  
+.................... //#int_RDA  
+.................... //void  RDA_isr(void)                       
+.................... //{    
+.................... //                               
+.................... //	//putc('k'); 
+.................... //	 
+.................... //   clear_interrupt(INT_RDA); 
+.................... //                                                      
+.................... //}     
+....................  
+.................... #INT_TIMER0         
+....................  void TimerInt() 
+....................  {    
+....................  
+.................... 	TickCount++; 
+*
+02EE:  MOVLB  1
+02F0:  INCF   x6B,F
+02F2:  BTFSC  FD8.2
+02F4:  INCF   x6C,F
+....................  
+.................... 	if(TickCount > 10000){ 
+02F6:  MOVF   x6C,W
+02F8:  SUBLW  26
+02FA:  BC    030C
+02FC:  XORLW  FF
+02FE:  BNZ   0306
+0300:  MOVF   x6B,W
+0302:  SUBLW  10
+0304:  BC    030C
+.................... 		TickCount = 1; 
+0306:  CLRF   x6C
+0308:  MOVLW  01
+030A:  MOVWF  x6B
+.................... 	} 
+.................... 	if(motorRotation == MOTOR_DIR_CW){ 
+030C:  MOVF   x69,W
+030E:  SUBLW  0A
+0310:  BNZ   03A6
+....................  
+.................... 		switch(motorState){ 
+0312:  MOVF   x68,W
+0314:  XORLW  0A
+0316:  MOVLB  0
+0318:  BZ    032C
+031A:  XORLW  1E
+031C:  BZ    0344
+031E:  XORLW  0A
+0320:  BZ    035C
+0322:  XORLW  36
+0324:  BZ    0374
+0326:  XORLW  1A
+0328:  BZ    038C
+032A:  BRA    03A0
+....................  
+.................... 			case POS1	: 	output_high(ONE); 
+032C:  BCF    F95.7
+032E:  BSF    F8C.7
+.................... 							output_low(TWO); 
+0330:  BCF    F95.6
+0332:  BCF    F8C.6
+.................... 							output_low(THREE); 
+0334:  BCF    F95.5
+0336:  BCF    F8C.5
+.................... 							output_low(FOUR); 
+0338:  BCF    F95.4
+033A:  BCF    F8C.4
+.................... 							motorState = POS2; 
+033C:  MOVLW  14
+033E:  MOVLB  1
+0340:  MOVWF  x68
+.................... 							break;    
+0342:  BRA    03A4
+.................... 			case POS2	: 	output_low(ONE); 
+0344:  BCF    F95.7
+0346:  BCF    F8C.7
+.................... 							output_high(TWO); 
+0348:  BCF    F95.6
+034A:  BSF    F8C.6
+.................... 							output_low(THREE); 
+034C:  BCF    F95.5
+034E:  BCF    F8C.5
+.................... 							output_low(FOUR); 
+0350:  BCF    F95.4
+0352:  BCF    F8C.4
+.................... 							motorState = POS3; 
+0354:  MOVLW  1E
+0356:  MOVLB  1
+0358:  MOVWF  x68
+.................... 							break;   
+035A:  BRA    03A4
+.................... 			case POS3	: 	output_low(ONE); 
+035C:  BCF    F95.7
+035E:  BCF    F8C.7
+.................... 							output_low(TWO); 
+0360:  BCF    F95.6
+0362:  BCF    F8C.6
+.................... 							output_high(THREE); 
+0364:  BCF    F95.5
+0366:  BSF    F8C.5
+.................... 							output_low(FOUR); 
+0368:  BCF    F95.4
+036A:  BCF    F8C.4
+.................... 							motorState = POS4; 
+036C:  MOVLW  28
+036E:  MOVLB  1
+0370:  MOVWF  x68
+.................... 							break;  
+0372:  BRA    03A4
+.................... 			case POS4	: 	output_low(ONE); 
+0374:  BCF    F95.7
+0376:  BCF    F8C.7
+.................... 							output_low(TWO); 
+0378:  BCF    F95.6
+037A:  BCF    F8C.6
+.................... 							output_low(THREE); 
+037C:  BCF    F95.5
+037E:  BCF    F8C.5
+.................... 							output_high(FOUR); 
+0380:  BCF    F95.4
+0382:  BSF    F8C.4
+.................... 							motorState = POS1; 
+0384:  MOVLW  0A
+0386:  MOVLB  1
+0388:  MOVWF  x68
+.................... 							break;  
+038A:  BRA    03A4
+.................... 			case STOP	:   output_low(ONE); 
+038C:  BCF    F95.7
+038E:  BCF    F8C.7
+.................... 							output_low(TWO); 
+0390:  BCF    F95.6
+0392:  BCF    F8C.6
+.................... 							output_low(THREE); 
+0394:  BCF    F95.5
+0396:  BCF    F8C.5
+.................... 							output_low(FOUR); 
+0398:  BCF    F95.4
+039A:  BCF    F8C.4
+.................... 							break;  
+039C:  MOVLB  1
+039E:  BRA    03A4
+.................... 			default	 	: break; 
+03A0:  MOVLB  1
+03A2:  BRA    03A4
+.................... 		} 
+.................... 	}else{ 
+03A4:  BRA    03B6
+....................  
+.................... 							output_low(ONE); 
+03A6:  BCF    F95.7
+03A8:  BCF    F8C.7
+.................... 							output_low(TWO); 
+03AA:  BCF    F95.6
+03AC:  BCF    F8C.6
+.................... 							output_low(THREE); 
+03AE:  BCF    F95.5
+03B0:  BCF    F8C.5
+.................... 							output_low(FOUR); 
+03B2:  BCF    F95.4
+03B4:  BCF    F8C.4
+.................... 	} 
+....................    if(flag==0){ 
+03B6:  MOVF   x67,F
+03B8:  BNZ   03C4
+.................... 		flag =1; 
+03BA:  MOVLW  01
+03BC:  MOVWF  x67
+.................... 		output_high(ZERO); 
+03BE:  BCF    F95.0
+03C0:  BSF    F8C.0
+.................... 	}else{ 
+03C2:  BRA    03CA
+.................... 		output_low(ZERO); 
+03C4:  BCF    F95.0
+03C6:  BCF    F8C.0
+.................... 		flag = 0; 
+03C8:  CLRF   x67
+.................... 	} 
+....................    set_timer0(55555);                
+03CA:  MOVLW  D9
+03CC:  MOVWF  FD7
+03CE:  MOVLW  03
+03D0:  MOVWF  FD6
+....................    //bit_clear(INTCON,2);                                     // CLEAR TIMER 0 OVERFLOW FLAG 
+.................... 	clear_interrupt(int_timer0); 
+03D2:  BCF    FF2.2
+....................  
+....................  
+.................... }   
+....................  
+03D4:  BCF    FF2.2
+03D6:  MOVLB  0
+03D8:  GOTO   0070
+.................... void main() 
+.................... { 
+*
+0A3E:  CLRF   FF8
+0A40:  BCF    FD0.7
+0A42:  BSF    08.7
+0A44:  CLRF   FEA
+0A46:  CLRF   FE9
+0A48:  BCF    FB8.3
+0A4A:  MOVLW  0C
+0A4C:  MOVWF  FAF
+0A4E:  MOVLW  A6
+0A50:  MOVWF  FAC
+0A52:  MOVLW  90
+0A54:  MOVWF  FAB
+0A56:  MOVF   FC1,W
+0A58:  ANDLW  C0
+0A5A:  IORLW  0F
+0A5C:  MOVWF  FC1
+0A5E:  MOVLW  07
+0A60:  MOVWF  FB4
+0A62:  CLRF   19
+0A64:  CLRF   1A
+0A66:  CLRF   49
+0A68:  CLRF   4A
+0A6A:  CLRF   4B
+0A6C:  CLRF   x61
+0A6E:  MOVLW  FF
+0A70:  MOVWF  x62
+0A72:  MOVWF  x63
+0A74:  MOVLW  08
+0A76:  MOVLB  1
+0A78:  MOVWF  x65
+0A7A:  CLRF   x66
+0A7C:  CLRF   x67
+0A7E:  MOVLW  0A
+0A80:  MOVWF  x68
+0A82:  MOVLW  FF
+0A84:  MOVWF  x69
+0A86:  CLRF   x6A
+0A88:  CLRF   x6B
+0A8A:  CLRF   x6C
+0A8C:  CLRF   x6D
+0A8E:  CLRF   x6E
+0A90:  CLRF   x6F
+0A92:  CLRF   x70
+0A94:  CLRF   x71
+0A96:  CLRF   x72
+0A98:  CLRF   x73
+0A9A:  CLRF   x74
+0A9C:  CLRF   x75
+0A9E:  CLRF   x76
+0AA0:  CLRF   x77
+0AA2:  CLRF   x78
+0AA4:  CLRF   x79
+0AA6:  CLRF   x7A
+0AA8:  CLRF   x7B
+0AAA:  CLRF   x7C
+0AAC:  MOVWF  x7D
+0AAE:  MOVWF  x7E
+0AB0:  MOVWF  x7F
+0AB2:  MOVWF  x80
+0AB4:  CLRF   x81
+0AB6:  MOVLB  0
+0AB8:  MOVWF  x64
+0ABA:  MOVLB  1
+0ABC:  BCF    x82.0
+0ABE:  CLRF   x83
+....................  
+....................    	setup_adc_ports(NO_ANALOGS|VSS_VDD); 
+0AC0:  MOVF   FC1,W
+0AC2:  ANDLW  C0
+0AC4:  IORLW  0F
+0AC6:  MOVWF  FC1
+....................    	setup_adc(ADC_CLOCK_DIV_2); 
+0AC8:  BCF    FC0.0
+0ACA:  BCF    FC0.1
+0ACC:  BCF    FC0.2
+0ACE:  BCF    FC0.7
+0AD0:  BSF    FC2.0
+....................    	setup_psp(PSP_DISABLED); 
+0AD2:  BCF    F96.4
+....................    	setup_spi(SPI_SS_DISABLED); 
+0AD4:  BCF    FC6.5
+0AD6:  BCF    F94.7
+0AD8:  BSF    F93.0
+0ADA:  BCF    F93.1
+0ADC:  MOVLW  01
+0ADE:  MOVWF  FC6
+0AE0:  MOVLW  00
+0AE2:  MOVWF  FC7
+....................    	setup_wdt(WDT_OFF); 
+0AE4:  BCF    FD1.0
+....................    	setup_timer_0(RTCC_INTERNAL); 
+0AE6:  MOVLW  80
+0AE8:  MOVWF  FD5
+....................    	setup_timer_1(T1_DISABLED); 
+0AEA:  CLRF   FCD
+....................    	setup_timer_2(T2_DISABLED,0,1); 
+0AEC:  MOVLW  00
+0AEE:  MOVWF  FCA
+0AF0:  MOVLW  00
+0AF2:  MOVWF  FCB
+....................    	setup_comparator(NC_NC_NC_NC); 
+0AF4:  MOVLW  07
+0AF6:  MOVWF  FB4
+0AF8:  MOVF   F92,W
+0AFA:  MOVWF  F92
+0AFC:  MOVLW  06
+0AFE:  MOVWF  00
+0B00:  DECFSZ 00,F
+0B02:  BRA    0B00
+0B04:  NOP   
+0B06:  MOVF   FB4,W
+0B08:  BCF    FA1.6
+....................    	setup_vref(FALSE); 
+0B0A:  CLRF   FB5
+....................  
+....................    	enable_interrupts(GLOBAL); 
+0B0C:  MOVLW  C0
+0B0E:  IORWF  FF2,F
+.................... 	enable_interrupts(INT_RDA); 
+0B10:  BSF    F9D.5
+....................    	enable_interrupts(INT_TIMER0); 
+0B12:  BSF    FF2.5
+....................    	set_timer0(55555);  
+0B14:  MOVLW  D9
+0B16:  MOVWF  FD7
+0B18:  MOVLW  03
+0B1A:  MOVWF  FD6
+....................  
+.................... 	SET_TRIS_B(0x07); 
+0B1C:  MOVLW  07
+0B1E:  MOVWF  F93
+....................  
+....................    	output_drive(ZERO); 
+0B20:  BCF    F95.0
+.................... 	output_drive(ONE); 
+0B22:  BCF    F95.7
+.................... 	output_drive(TWO); 
+0B24:  BCF    F95.6
+.................... 	output_drive(THREE); 
+0B26:  BCF    F95.5
+.................... 	output_drive(FOUR); 
+0B28:  BCF    F95.4
+....................  
+.................... 	output_low(ONE); 
+0B2A:  BCF    F95.7
+0B2C:  BCF    F8C.7
+.................... 	output_low(TWO); 
+0B2E:  BCF    F95.6
+0B30:  BCF    F8C.6
+.................... 	output_low(THREE); 
+0B32:  BCF    F95.5
+0B34:  BCF    F8C.5
+.................... 	output_low(FOUR); 
+0B36:  BCF    F95.4
+0B38:  BCF    F8C.4
+....................  
+.................... //	while(1){ 
+.................... //	output_high(ZERO); 
+.................... //	} 
+.................... 	currentCommand.availableFlag = FALSE; 
+0B3A:  MOVLB  0
+0B3C:  BCF    x65.0
+.................... 	 
+.................... 	fineTuning[0] = 100; 
+0B3E:  MOVLW  64
+0B40:  MOVLB  1
+0B42:  MOVWF  x75
+.................... 	fineTuning[6] = 190; 
+0B44:  MOVLW  BE
+0B46:  MOVWF  x7B
+.................... 	fineTuning[7] = 100; 
+0B48:  MOVLW  64
+0B4A:  MOVWF  x7C
+.................... 	fineTuning[5] = 100; 
+0B4C:  MOVWF  x7A
+.................... 	fineTuning[4] = 100; 
+0B4E:  MOVWF  x79
+0B50:  CLRF   18
+0B52:  BTFSC  FF2.7
+0B54:  BSF    18.7
+0B56:  BCF    FF2.7
+.................... 	//CW(); 
+.................... HwPutc(20); 
+0B58:  MOVLW  14
+0B5A:  MOVWF  x93
+0B5C:  MOVLB  0
+0B5E:  CALL   0288
+0B62:  BTFSC  18.7
+0B64:  BSF    FF2.7
+0B66:  CLRF   18
+0B68:  BTFSC  FF2.7
+0B6A:  BSF    18.7
+0B6C:  BCF    FF2.7
+.................... HwPutc(20); 
+0B6E:  MOVLW  14
+0B70:  MOVLB  1
+0B72:  MOVWF  x93
+0B74:  MOVLB  0
+0B76:  CALL   0288
+0B7A:  BTFSC  18.7
+0B7C:  BSF    FF2.7
+....................    while(1){ 
+....................     
+....................      
+.................... 	if((TickCount % 5) == 0){ 
+0B7E:  MOVFF  16C,185
+0B82:  MOVFF  16B,184
+0B86:  MOVLB  1
+0B88:  CLRF   x87
+0B8A:  MOVLW  05
+0B8C:  MOVWF  x86
+0B8E:  MOVLB  0
+0B90:  RCALL  03DC
+0B92:  MOVFF  00,184
+0B96:  MOVLB  1
+0B98:  MOVFF  03,185
+0B9C:  MOVF   x84,F
+0B9E:  BTFSS  FD8.2
+0BA0:  BRA    0C80
+0BA2:  MOVF   x85,F
+0BA4:  BTFSS  FD8.2
+0BA6:  BRA    0C80
+.................... x = PORTE; 
+0BA8:  MOVFF  F84,183
+.................... 		if(prevPinB0 == 255) 
+0BAC:  INCFSZ x7F,W
+0BAE:  BRA    0BB6
+.................... 		   currPinB0 = (PORTE & 0x4);		//OK its just the begining we check how the PORTB.P0 
+0BB0:  MOVF   F84,W
+0BB2:  ANDLW  04
+0BB4:  MOVWF  x80
+....................  
+.................... 		currPinB0 = (PORTE & 0x4);			//Get the PORTB.P0 state 
+0BB6:  MOVF   F84,W
+0BB8:  ANDLW  04
+0BBA:  MOVWF  x80
+....................  
+.................... 		if(currPinB0 != prevPinB0){			//PORTB.P0 has changed its state 
+0BBC:  MOVF   x7F,W
+0BBE:  SUBWF  x80,W
+0BC0:  BZ    0C66
+....................  
+.................... 			prevPinB0 = currPinB0; 
+0BC2:  MOVFF  180,17F
+.................... 			prevState = ProcessSampleArray(sampleArray); 
+0BC6:  MOVLW  01
+0BC8:  MOVWF  x85
+0BCA:  MOVLW  6D
+0BCC:  MOVWF  x84
+0BCE:  MOVLB  0
+0BD0:  BRA    0422
+0BD2:  MOVFF  01,17D
+.................... 			printf("state %d \r\n",prevState); 
+0BD6:  MOVLB  1
+0BD8:  CLRF   x84
+0BDA:  MOVF   x84,W
+0BDC:  MOVLB  0
+0BDE:  CALL   021A
+0BE2:  MOVLB  1
+0BE4:  INCF   x84,F
+0BE6:  MOVLB  0
+0BE8:  RCALL  04C8
+0BEA:  MOVLW  06
+0BEC:  MOVLB  1
+0BEE:  SUBWF  x84,W
+0BF0:  BNZ   0BDA
+0BF2:  MOVFF  17D,18A
+0BF6:  MOVLW  1F
+0BF8:  MOVWF  x8B
+0BFA:  MOVLB  0
+0BFC:  RCALL  04FC
+0BFE:  MOVLW  20
+0C00:  RCALL  04C8
+0C02:  MOVLW  0D
+0C04:  RCALL  04C8
+0C06:  MOVLW  0A
+0C08:  RCALL  04C8
+.................... 			 
+....................  
+.................... 			if(Target != 255 && prevState == (Target-1)){ 
+0C0A:  INCFSZ x63,W
+0C0C:  BRA    0C10
+0C0E:  BRA    0C46
+0C10:  MOVLW  01
+0C12:  SUBWF  x63,W
+0C14:  MOVLB  1
+0C16:  SUBWF  x7D,W
+0C18:  BTFSC  FD8.2
+0C1A:  BRA    0C20
+0C1C:  MOVLB  0
+0C1E:  BRA    0C46
+.................... 	 
+.................... 				//motorState = STOP; 
+.................... 				delay_ms(fineTuning[Target-1]); 
+0C20:  MOVLW  01
+0C22:  MOVLB  0
+0C24:  SUBWF  x63,W
+0C26:  CLRF   03
+0C28:  ADDLW  75
+0C2A:  MOVWF  FE9
+0C2C:  MOVLW  01
+0C2E:  ADDWFC 03,W
+0C30:  MOVWF  FEA
+0C32:  MOVFF  FEF,185
+0C36:  MOVFF  185,186
+0C3A:  BRA    05D8
+.................... 				motorRotation = MOTOR_HALT; 
+0C3C:  MOVLW  32
+0C3E:  MOVLB  1
+0C40:  MOVWF  x69
+.................... 				oldTarget = Target; 
+0C42:  MOVFF  63,64
+.................... //				delay_ms(2000);  
+.................... //				motorState = POS1; 
+.................... //				Target = 255; 
+.................... 			} 
+....................  
+....................  
+.................... 			//Clear the sampleArray and start filling a new one 
+.................... 			for(i = 0; i < 8; i++) 
+0C46:  MOVLB  1
+0C48:  CLRF   x81
+0C4A:  MOVF   x81,W
+0C4C:  SUBLW  07
+0C4E:  BNC   0C64
+.................... 				sampleArray[i] = 0; 
+0C50:  CLRF   03
+0C52:  MOVF   x81,W
+0C54:  ADDLW  6D
+0C56:  MOVWF  FE9
+0C58:  MOVLW  01
+0C5A:  ADDWFC 03,W
+0C5C:  MOVWF  FEA
+0C5E:  CLRF   FEF
+0C60:  INCF   x81,F
+0C62:  BRA    0C4A
+....................  
+.................... 			fillSampleArray = TRUE; 
+0C64:  BSF    x82.0
+.................... 		} 
+.................... 		 
+.................... 		sensorVal = 0x7 - (PORTB & 0x7); 
+0C66:  MOVF   F81,W
+0C68:  ANDLW  07
+0C6A:  XORLW  FF
+0C6C:  ADDLW  08
+0C6E:  MOVWF  x6A
+.................... 		sampleArray[sensorVal] ++; 
+0C70:  CLRF   03
+0C72:  MOVF   x6A,W
+0C74:  ADDLW  6D
+0C76:  MOVWF  FE9
+0C78:  MOVLW  01
+0C7A:  ADDWFC 03,W
+0C7C:  MOVWF  FEA
+0C7E:  INCF   FEF,F
+....................  
+.................... 	//printf("value %d \r\n",sensorVal); 
+.................... 	} 
+....................  
+.................... 	if((TickCount % 10) == 0){ 
+0C80:  MOVFF  16C,185
+0C84:  MOVFF  16B,184
+0C88:  CLRF   x87
+0C8A:  MOVLW  0A
+0C8C:  MOVWF  x86
+0C8E:  MOVLB  0
+0C90:  CALL   03DC
+0C94:  MOVFF  00,184
+0C98:  MOVLB  1
+0C9A:  MOVFF  03,185
+0C9E:  MOVF   x84,F
+0CA0:  BNZ   0CD8
+0CA2:  MOVF   x85,F
+0CA4:  BNZ   0CD8
+....................  
+.................... 		if(Target == 255){ 
+0CA6:  MOVLB  0
+0CA8:  INCFSZ x63,W
+0CAA:  BRA    0CB4
+....................  
+.................... 			//motorState = STOP; 
+.................... 			motorRotation = MOTOR_HALT; 
+0CAC:  MOVLW  32
+0CAE:  MOVLB  1
+0CB0:  MOVWF  x69
+0CB2:  MOVLB  0
+.................... 		} 
+.................... 		if(oldTarget != Target){ 
+0CB4:  MOVF   x63,W
+0CB6:  SUBWF  x64,W
+0CB8:  BZ    0CC2
+.................... 			//motorState = POS1; 
+.................... 			motorRotation = MOTOR_DIR_CW; 
+0CBA:  MOVLW  0A
+0CBC:  MOVLB  1
+0CBE:  MOVWF  x69
+0CC0:  MOVLB  0
+.................... 		} 
+.................... 		Kernal(); 
+0CC2:  BRA    064C
+.................... 		if(currentCommand.availableFlag==TRUE){ 
+0CC4:  BTFSS  x65.0
+0CC6:  BRA    0CD8
+.................... 			QueLaserBuffer(LaserSubString); 
+0CC8:  MOVLB  1
+0CCA:  CLRF   x85
+0CCC:  MOVLW  4F
+0CCE:  MOVWF  x84
+0CD0:  MOVLB  0
+0CD2:  BRA    0A08
+.................... 			currentCommand.availableFlag=FALSE; 
+0CD4:  BCF    x65.0
+.................... 			ClearLaserSubString(); 
+0CD6:  RCALL  062A
+.................... 		} 
+....................  
+.................... 	} 
+.................... 	//delay_ms(100); 
+.................... //	putc('A'); 
+.................... //	delay_ms(10); 
+.................... //   output_high(ZERO); 
+.................... //   delay_ms(1000); 
+.................... //   output_low(ZERO); 
+.................... //   delay_ms(1000); 
+....................     
+....................    } 
+0CD8:  MOVLB  0
+0CDA:  BRA    0B7E
+....................  
+.................... } 
+....................  
+.................... void CW(){ 
+....................  
+0CDC:  SLEEP 
+.................... while(1){ 
+....................  
+.................... 	output_high(ONE); 
+.................... 	output_low(TWO); 
+.................... 	output_low(THREE); 
+.................... 	output_low(FOUR); 
+....................  
+.................... 	//output_high(ZERO); 
+.................... 	delay_ms(StepDly); 
+....................  
+.................... 	output_low(ONE); 
+.................... 	output_high(TWO); 
+.................... 	output_low(THREE); 
+.................... 	output_low(FOUR); 
+....................  
+.................... 	//output_low(ZERO); 
+.................... 	delay_ms(StepDly); 
+....................  
+.................... 	output_low(ONE); 
+.................... 	output_low(TWO); 
+.................... 	output_high(THREE); 
+.................... 	output_low(FOUR); 
+....................  
+.................... 	//output_high(ZERO); 
+.................... 	delay_ms(StepDly); 
+....................  
+.................... 	output_low(ONE); 
+.................... 	output_low(TWO); 
+.................... 	output_low(THREE); 
+.................... 	output_high(FOUR); 
+....................  
+.................... 	//output_low(ZERO); 
+.................... 	delay_ms(StepDly); 
+....................  
+....................  
+....................  
+.................... } 
+....................  
+.................... } 
+....................  
+.................... int8 ProcessSampleArray(int8 *t){ 
+.................... 	 
+.................... 	int8 maximum;  
+.................... 	int8 index = 0; 
+*
+0422:  MOVLB  1
+0424:  CLRF   x87
+.................... 	int8 j=0; 
+0426:  CLRF   x88
+.................... 	 
+.................... 	maximum = t[0]; 
+0428:  MOVFF  184,FE9
+042C:  MOVFF  185,FEA
+0430:  MOVFF  FEF,186
+....................  
+.................... 	for (j=0; j<8; j++) { 
+0434:  CLRF   x88
+0436:  MOVF   x88,W
+0438:  SUBLW  07
+043A:  BNC   046A
+....................  
+....................     	if (t[j] > maximum) { 
+043C:  CLRF   03
+043E:  MOVF   x88,W
+0440:  ADDWF  x84,W
+0442:  MOVWF  FE9
+0444:  MOVF   x85,W
+0446:  ADDWFC 03,W
+0448:  MOVWF  FEA
+044A:  MOVF   FEF,W
+044C:  SUBWF  x86,W
+044E:  BC    0466
+....................         	maximum = t[j];   	// maximum 
+0450:  CLRF   03
+0452:  MOVF   x88,W
+0454:  ADDWF  x84,W
+0456:  MOVWF  FE9
+0458:  MOVF   x85,W
+045A:  ADDWFC 03,W
+045C:  MOVWF  FEA
+045E:  MOVFF  FEF,186
+....................         	index = j; 			// comparing index 
+0462:  MOVFF  188,187
+....................     	} 
+.................... 	} 
+0466:  INCF   x88,F
+0468:  BRA    0436
+.................... 	 
+.................... 	for (j=0; j<8; j++) { 
+046A:  CLRF   x88
+046C:  MOVF   x88,W
+046E:  SUBLW  07
+0470:  BNC   04A0
+....................  
+....................     	if (t[j] > maximum) { 
+0472:  CLRF   03
+0474:  MOVF   x88,W
+0476:  ADDWF  x84,W
+0478:  MOVWF  FE9
+047A:  MOVF   x85,W
+047C:  ADDWFC 03,W
+047E:  MOVWF  FEA
+0480:  MOVF   FEF,W
+0482:  SUBWF  x86,W
+0484:  BC    049C
+....................         	maximum = t[j];   	// maximum 
+0486:  CLRF   03
+0488:  MOVF   x88,W
+048A:  ADDWF  x84,W
+048C:  MOVWF  FE9
+048E:  MOVF   x85,W
+0490:  ADDWFC 03,W
+0492:  MOVWF  FEA
+0494:  MOVFF  FEF,186
+....................         	index = j; 			// comparing index 
+0498:  MOVFF  188,187
+....................     	} 
+.................... 	} 
+049C:  INCF   x88,F
+049E:  BRA    046C
+....................  
+.................... 	if(t[index] > 15) 
+04A0:  CLRF   03
+04A2:  MOVF   x87,W
+04A4:  ADDWF  x84,W
+04A6:  MOVWF  FE9
+04A8:  MOVF   x85,W
+04AA:  ADDWFC 03,W
+04AC:  MOVWF  FEA
+04AE:  MOVF   FEF,W
+04B0:  SUBLW  0F
+04B2:  BC    04BC
+.................... 		return index; 
+04B4:  MOVFF  187,01
+04B8:  BRA    04C2
+.................... 	else 
+04BA:  BRA    04C2
+.................... 		return 255; 
+04BC:  MOVLW  FF
+04BE:  MOVWF  01
+04C0:  BRA    04C2
+.................... } 
+04C2:  MOVLB  0
+04C4:  GOTO   0BD2 (RETURN)
+....................  
+.................... //2013.1.24 
+.................... //#include "main.h" 
+.................... // 
+.................... //#define ZERO	PIN_D0 
+.................... // 
+.................... //#define ONE		PIN_D7 
+.................... //#define TWO		PIN_D6 
+.................... //#define THREE	PIN_D5 
+.................... //#define FOUR	PIN_D4 
+.................... // 
+.................... //#define POS1	10 
+.................... //#define POS2	20 
+.................... //#define POS3	30 
+.................... //#define POS4	40 
+.................... //#define STOP	50 
+.................... // 
+.................... //#define SENSOR1 PIN_B0 
+.................... //#define SENSOR2 PIN_B1 
+.................... //#define SENSOR3 PIN_B2 
+.................... // 
+.................... //unsigned int16 StepDly = 8; 
+.................... //unsigned int8 flag = 0; 
+.................... //unsigned int8 motorState =  POS1; 
+.................... //unsigned int8 sensorVal = 0; 
+.................... //void CW(); 
+.................... // 
+.................... //#int_RDA  
+.................... //void  RDA_isr(void)                       
+.................... //{    
+.................... //                               
+.................... //	//putc('k'); 
+.................... //	 
+.................... //   clear_interrupt(INT_RDA); 
+.................... //                                                      
+.................... //}     
+.................... // 
+.................... //#INT_TIMER0         
+.................... // void TimerInt() 
+.................... // {    
+.................... // 
+.................... //	switch(motorState){ 
+.................... // 
+.................... //		case POS1	: 	output_high(ONE); 
+.................... //						output_low(TWO); 
+.................... //						output_low(THREE); 
+.................... //						output_low(FOUR); 
+.................... //						motorState = POS2; 
+.................... //						break;    
+.................... //		case POS2	: 	output_low(ONE); 
+.................... //						output_high(TWO); 
+.................... //						output_low(THREE); 
+.................... //						output_low(FOUR); 
+.................... //						motorState = POS3; 
+.................... //						break;   
+.................... //		case POS3	: 	output_low(ONE); 
+.................... //						output_low(TWO); 
+.................... //						output_high(THREE); 
+.................... //						output_low(FOUR); 
+.................... //						motorState = POS4; 
+.................... //						break;  
+.................... //		case POS4	: 	output_low(ONE); 
+.................... //						output_low(TWO); 
+.................... //						output_low(THREE); 
+.................... //						output_high(FOUR); 
+.................... //						motorState = POS1; 
+.................... //						break;  
+.................... //		case STOP	: break;  
+.................... //		default	 	: break; 
+.................... //	} 
+.................... //   if(flag==0){ 
+.................... //		flag =1; 
+.................... //		output_high(ZERO); 
+.................... //	}else{ 
+.................... //		output_low(ZERO); 
+.................... //		flag = 0; 
+.................... //	} 
+.................... //   set_timer0(55000);                
+.................... //   //bit_clear(INTCON,2);                                     // CLEAR TIMER 0 OVERFLOW FLAG 
+.................... //	clear_interrupt(int_timer0); 
+.................... // 
+.................... // 
+.................... //}   
+.................... // 
+.................... //void main() 
+.................... //{ 
+.................... // 
+.................... //   	setup_adc_ports(NO_ANALOGS|VSS_VDD); 
+.................... //   	setup_adc(ADC_CLOCK_DIV_2); 
+.................... //   	setup_psp(PSP_DISABLED); 
+.................... //   	setup_spi(SPI_SS_DISABLED); 
+.................... //   	setup_wdt(WDT_OFF); 
+.................... //   	setup_timer_0(RTCC_INTERNAL); 
+.................... //   	setup_timer_1(T1_DISABLED); 
+.................... //   	setup_timer_2(T2_DISABLED,0,1); 
+.................... //   	setup_comparator(NC_NC_NC_NC); 
+.................... //   	setup_vref(FALSE); 
+.................... // 
+.................... //   	enable_interrupts(GLOBAL); 
+.................... //	enable_interrupts(INT_RDA); 
+.................... //   	enable_interrupts(INT_TIMER0); 
+.................... //   	set_timer0(15555);  
+.................... // 
+.................... //	SET_TRIS_B(0x07); 
+.................... // 
+.................... //   	output_drive(ZERO); 
+.................... //	output_drive(ONE); 
+.................... //	output_drive(TWO); 
+.................... //	output_drive(THREE); 
+.................... //	output_drive(FOUR); 
+.................... // 
+.................... //	output_low(ONE); 
+.................... //	output_low(TWO); 
+.................... //	output_low(THREE); 
+.................... //	output_low(FOUR); 
+.................... // 
+.................... ////	CW(); 
+.................... // 
+.................... //   while(1){ 
+.................... //    
+.................... //	sensorVal = 0x7 - (PORTB & 0x7); 
+.................... //	printf("value %d \r\n",sensorVal); 
+.................... //	delay_ms(300); 
+.................... ////	putc('A'); 
+.................... ////	delay_ms(10); 
+.................... ////   output_high(ZERO); 
+.................... ////   delay_ms(1000); 
+.................... ////   output_low(ZERO); 
+.................... ////   delay_ms(1000); 
+.................... //    
+.................... //   } 
+.................... // 
+.................... //} 
+.................... // 
+.................... //void CW(){ 
+.................... // 
+.................... //while(1){ 
+.................... // 
+.................... //	output_high(ONE); 
+.................... //	output_low(TWO); 
+.................... //	output_low(THREE); 
+.................... //	output_low(FOUR); 
+.................... // 
+.................... //	//output_high(ZERO); 
+.................... //	delay_ms(StepDly); 
+.................... // 
+.................... //	output_low(ONE); 
+.................... //	output_high(TWO); 
+.................... //	output_low(THREE); 
+.................... //	output_low(FOUR); 
+.................... // 
+.................... //	//output_low(ZERO); 
+.................... //	delay_ms(StepDly); 
+.................... // 
+.................... //	output_low(ONE); 
+.................... //	output_low(TWO); 
+.................... //	output_high(THREE); 
+.................... //	output_low(FOUR); 
+.................... // 
+.................... //	//output_high(ZERO); 
+.................... //	delay_ms(StepDly); 
+.................... // 
+.................... //	output_low(ONE); 
+.................... //	output_low(TWO); 
+.................... //	output_low(THREE); 
+.................... //	output_high(FOUR); 
+.................... // 
+.................... //	//output_low(ZERO); 
+.................... //	delay_ms(StepDly); 
+.................... // 
+.................... // 
+.................... // 
+.................... //} 
+.................... // 
+.................... //} 
+
+Configuration Fuses:
+   Word  1: CC27   IESO FCMEN HS PLL12 CPUDIV1 USBDIV
+   Word  2: 0E39   NOBROWNOUT WDT128 NOWDT BORV20 NOPUT VREGEN
+   Word  3: 8700   PBADEN CCP2C1 MCLR LPT1OSC
+   Word  4: 0001   STVREN DEBUG NOLVP NOXINST NOICPRT RESERVED
+   Word  5: C00F   NOPROTECT NOCPD NOCPB
+   Word  6: E00F   NOWRT NOWRTD NOWRTC NOWRTB
+   Word  7: 400F   NOEBTR NOEBTRB

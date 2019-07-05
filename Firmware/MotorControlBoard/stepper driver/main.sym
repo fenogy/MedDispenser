@@ -1,0 +1,198 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @SCRATCH
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     @INTERRUPT_AREA
+017     @INTERRUPT_AREA
+018     @INTERRUPT_AREA
+019-01A strtok.save
+01B-038 hwTxFIFO
+039-048 hwRxFIFO
+049     hwTxStatus
+04A     hwRxStatus
+04B     hwTxPointer
+04C     startIndex
+04D     endIndex
+04E     tempIndex
+04F-05E LaserSubString
+05F     colon1Received
+060     enterReceived
+061     commandLength
+062     Cmd
+063     Target
+064     oldTarget
+065-164 currentCommand
+165-166 StepDly
+167     flag
+168     motorState
+169     motorRotation
+16A     sensorVal
+16B-16C TickCount
+16D-174 sampleArray
+175-17C fineTuning
+17D     prevState
+17E     currState
+17F     prevPinB0
+180     currPinB0
+181     i
+182.0   fillSampleArray
+183     x
+184-185 ProcessSampleArray.t
+184-185 QueLaserBuffer.str
+184-185 @DIV1616.P1
+184     Kernal.i
+184     MAIN.@SCRATCH1
+185     Kernal.j
+185     MAIN.@SCRATCH2
+186     QueLaserBuffer.i
+186     Kernal.k
+186     @delay_ms1.P1
+186     ProcessSampleArray.maximum
+186-187 @DIV1616.P1
+187-188 strlen.s
+187     ProcessSampleArray.index
+187     Kernal.noOfColons
+187     ClearLaserTxBuffer.i
+188     ProcessSampleArray.j
+188     Kernal.noOfEnters
+188     ClearLaserTxBuffer.@SCRATCH1
+188     @DIV1616.@SCRATCH1
+189.0   Kernal.isCommandSuspect
+189-18A strlen.sc
+189     ClearLaserTxBuffer.@SCRATCH2
+189     ProcessSampleArray.@SCRATCH1
+18A     ClearLaserSubString.i
+18A     @PRINTF_D_38400_31766_31767.P1
+18A     ClearLaserRxBuffer.i
+18A     Kernal.@SCRATCH1
+18B     @PRINTF_D_38400_31766_31767.P1
+18B     strlen.@SCRATCH1
+18B     Kernal.@SCRATCH2
+18B     ClearLaserRxBuffer.@SCRATCH1
+18B     ClearLaserSubString.@SCRATCH1
+18C     Kernal.@SCRATCH3
+18C     @PRINTF_D_38400_31766_31767.@SCRATCH1
+18C     ClearLaserRxBuffer.@SCRATCH2
+18C     ClearLaserSubString.@SCRATCH2
+18D     Kernal.@SCRATCH4
+18D     @PRINTF_D_38400_31766_31767.@SCRATCH2
+18E     @PRINTF_D_38400_31766_31767.@SCRATCH3
+18F     @PRINTF_D_38400_31766_31767.@SCRATCH4
+190     @DIV88.P1
+191     @DIV88.P1
+192     @DIV88.@SCRATCH1
+193     HwPutc.c
+193     RDA_isr.@SCRATCH1
+194-195 HwSerialTxFIFO.data
+194     RDA_isr.@SCRATCH2
+196     HwSerialTxFIFO.length
+197     HwSerialTxFIFO.i
+198     HwSerialTxFIFO.@SCRATCH1
+199     HwSerialTxFIFO.@SCRATCH2
+19A     HwSerialTxFIFO.@SCRATCH3
+F81     PORTB
+F83     PSP_DATA
+F84     PORTE
+FAD     HWTXREG
+FAE     HWRXREG
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_HIGH
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBE     CCP_1_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+05D8  @delay_ms1
+04C8  @PUTCHARI_BIU_1
+09CC  strlen
+029C  RDA_isr
+02C6  TBE_isr
+0240  HwSerialTxFIFO
+0288  HwPutc
+064C  Kernal
+00B6  @const200
+00DA  @const201
+00FE  @const202
+0122  @const203
+0146  @const204
+016A  @const205
+018E  @const206
+01B2  @const207
+01D6  @const208
+04D0  @DIV88
+04FC  @PRINTF_D_38400_31766_31767
+01F8  @const215
+0A08  QueLaserBuffer
+09A4  ClearLaserTxBuffer
+0602  ClearLaserRxBuffer
+062A  ClearLaserSubString
+02EE  TimerInt
+0A3E  MAIN
+03DC  @DIV1616
+021A  @const246
+0422  ProcessSampleArray
+0A3E  @cinit
+
+
+User Memory space: 
+
+Project Directory:
+    E:\WORK\stepper driver\
+
+Project Files:
+    main.c
+    main.h
+    C:\Program Files\PICC\devices\18F4550.h
+    C:\Program Files\PICC\drivers\string.h
+    C:\Program Files\PICC\drivers\stddef.h
+    C:\Program Files\PICC\drivers\ctype.h
+    HWManager.c
+    Kernal.c
+
+Units:
+    main.c (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX32:      main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.PJT
+    Call Tree:   main.tre
+    Statistics:  main.sta
